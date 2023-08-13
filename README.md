@@ -93,3 +93,33 @@ So if in the future we want to get data from the database instead of the network
 ### Usage: To add something for all widgets which is a child of our main widget
 Most of the Flutter built-in widgets use this type of composition for example `Container`, `Padding`, and `SizedBox`.
 
+```dart
+import 'package:flutter/material.dart';
+
+class GrayedWidget extends StatelessWidget {
+  final Widget child;
+
+  const GrayedWidget({required this.child, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ColorFiltered(
+      colorFilter: const ColorFilter.mode(
+        Colors.grey,
+        BlendMode.saturation,
+      ),
+      child: child,
+    );
+  }
+}
+```
+
+```dart
+void main() {
+  runApp(GrayedWidget(
+    child: Image.network(
+      "https://i.picsum.photos/id/1036/200/300.jpg?hmac=VF4u-vITiP0ezQiSbE3UBvxHDFf8ZqJDycaAIoffsCg",
+    ),
+  ));
+}
+```
