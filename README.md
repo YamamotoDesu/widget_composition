@@ -81,3 +81,11 @@ class UserNameWidget extends StatelessWidget {
   }
 }
 ```
+
+
+<blockquote>
+Here you can see UserDataProviderWidget loads user’s data from some were and pass it using builder function to its child. Some of the good results are our widget doesn’t depend on its child and the child doesn’t have any clue where this data comes from.
+
+So if in the future we want to get data from the database instead of the network we can modify this widget or create a separate widget for it. So its child doesn’t need to be modified.
+</blockquote>
+
