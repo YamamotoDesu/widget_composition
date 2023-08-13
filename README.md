@@ -1,16 +1,83 @@
-# widget_composition
+# [Widget Composition](https://medium.com/flutter-community/think-in-flutter-way-widget-composition-f8c4065de94b)
+## ✨ Top to Down Composition
+### Usage: This type of composition is normally used to provide some data from parent to child.
+Some of the well-known widgets that fit in this group are StreamBuilder, InheritedWidget, and FutureBuilder.
 
-A new Flutter project.
+```dart
+void main() {
+  runApp(
+    UserDataProviderWidget(builder: (_, UserModel userModel) {
+      return UserNameWidget(
+        key: Key(userModel.id),
+        userModel: userModel,
+      );
+    }),
+  );
+}
+```
 
-## Getting Started
+```dart
+import 'package:flutter/material.dart';
 
-This project is a starting point for a Flutter application.
+import '../models/user_model.dart';
 
-A few resources to get you started if this is your first Flutter project:
+class UserDataProviderWidget extends StatefulWidget {
+  final Widget Function(BuildContext context, UserModel user) builder;
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  const UserDataProviderWidget({
+    required this.builder,
+    Key? key,
+  }) : super(key: key);
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  @override
+  State<StatefulWidget> createState() => _UserDataProviderState();
+}
+
+class _UserDataProviderState extends State<UserDataProviderWidget> {
+  UserModel? user;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loadUser();
+  }
+
+  Future<void> loadUser() async {
+    // Load user from some places like network, database or
+    // any place in memory.
+    setState(() {
+      user = const UserModel("1", "Mahdi", "Shahbazi");
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (user == null) {
+      // show some loading
+      return const SizedBox.shrink();
+    } else {
+      return widget.builder(context, user!);
+    }
+  }
+}
+```
+
+```dart
+import 'package:flutter/material.dart';
+
+import '../models/user_model.dart';
+
+class UserNameWidget extends StatelessWidget {
+  final UserModel userModel;
+
+  const UserNameWidget({
+    required this.userModel,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text("${userModel.name} ${userModel.family}");
+  }
+}
+```
