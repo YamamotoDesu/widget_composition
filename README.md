@@ -1,5 +1,4 @@
-# [Widget Composition
-](https://medium.com/flutter-community/think-in-flutter-way-widget-composition-f8c4065de94b)
+# [Widget Composition](https://medium.com/flutter-community/think-in-flutter-way-widget-composition-f8c4065de94b)
 ## ✨ Top to Down Composition
 ### Usage: This type of composition is normally used to provide some data from parent to child.
 Some of the well-known widgets that fit in this group are StreamBuilder, InheritedWidget, and FutureBuilder.
