@@ -1,7 +1,7 @@
 # [Widget Composition](https://medium.com/flutter-community/think-in-flutter-way-widget-composition-f8c4065de94b)
 ## ✨ Top to Down Composition
 ### Usage: This type of composition is normally used to provide some data from parent to child.
-Some of the well-known widgets that fit in this group are StreamBuilder, InheritedWidget, and FutureBuilder.
+Some of the well-known widgets that fit in this group are `StreamBuilder`, `InheritedWidget`, and `FutureBuilder`.
 
 ```dart
 void main() {
@@ -88,4 +88,8 @@ Here you can see UserDataProviderWidget loads user’s data from some were and p
 
 So if in the future we want to get data from the database instead of the network we can modify this widget or create a separate widget for it. So its child doesn’t need to be modified.
 </blockquote>
+
+## ✨ Down to Top Composition
+### Usage: In this flow, the child doesn’t depend on its parent. The child doesn’t have any clue about its parent and just plays its role. 
+Most of the Flutter built-in widgets use this type of composition for example `Container`, `Padding`, and `SizedBox`.
 
